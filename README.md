@@ -3,7 +3,7 @@
 # Delvers: Curses of Risk and Rewards Proposal
 
 ## What is Delvers?
->A game about managing talent, resources, and risk as you fight through dungeons in turn-based combat, featuring pernament death.
+>A game about managing talent, resources, and risk as you fight through dungeons in turn-based combat, featuring permanent death.
 
 I enjoy games that require thought and also crank up the stakes way high. The idea of consenquence is a big focus in the rouge-like genre, but it's not really prominant in other genres. I'd like to see some high stakes and punishment in a seemingly complicated turn based game that'll hopefully be optimized for mobile screens.
 (Brief description of the game, why you're choosing to make it)
