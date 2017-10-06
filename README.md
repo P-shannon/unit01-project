@@ -20,29 +20,68 @@ This project, especially with the given timeframe will not be easy. I will need 
 
 ## Phases of Completion
 
+# Phase -4:
+
+>- basic interface exists
+>- characters exist
+>- characters can harm each other
+>- characters can die
+>- characters have stats
+>- characters can take turns
+
+# Phase -3:
+
+>- monsters can exist
+>- monsters can differentiate from each other
+>- selecting a battle target will populate a
+>- characters and monsters can select an action on thier turn
+>- basic battle actions exist and have effect
+>- character stats have an effect on a character's performances
+
+# Phase -2:
+
+>- character and monster inventories can exist
+>- items can exist
+>- items can exist outside of a characters' or monsters' inventory
+
+
+
 # Phase 0:
 
-- Characters can be organized into teams
-- Characters can embark on missions
-- Characters can die
-- Characters can have an inventory
-- Characters can use items in thier inventories
-- Characters can equip items
-- Characters can have thier stats and behavoirs modified by thier equipment
-- the player can die and cause a game over
-- the player can kill the final boss and win the game
-- the dungeons can generate monsters
-- the monsters can die
-- the corpses they leave behind can be harvested
-- the harvest will return an appropreiate item
-- those items can be sold for money
-- the player can manage money
-- the player can buy items from a shop
-- Characters can learn skills
-- Characters can level up
-- Characters can have stats 
-- Character's stats will influence thier performance through the game
-- 
+>- Interfaces exist
+>- Characters can be organized into teams
+>- Characters can embark on missions
+>- Characters can die
+>- Characters can have an inventory
+>- Characters can use items in thier inventories
+>- Characters can equip items
+>- Characters can have thier stats and behavoirs modified by thier equipment
+>- the player can die and cause a game over
+>- the player can kill the final boss and win the game
+>- the dungeons can generate monsters
+>- the monsters can die
+>- the corpses they leave behind can be harvested
+>- the harvest will return an appropreiate item
+>- those items can be sold for money
+>- the player can manage money
+>- the player can buy items from a shop
+>- Characters can learn skills
+>- Characters can level up
+>- Characters can have stats 
+>- Character's stats will influence thier performance through the game
+>- characters and monsters will have a degree of automated logic where they pick an action on thier turn
+>- monsters can have stats
+>- monsters can have slightly varying stats
+>- monsters will have thier behavoirs changed by thier stats
+>- monsters and characters can take turns 
+>- a monster's or character's turn position is dependant on thier last action's speed
+>- items can be sold
+>- items can be found in dungeons
+>- the dungeons can be navigated
+>- the dungeons can be exited
+>- battles can start
+>- battles can end
+>- battles can be escaped by either party
 
 (The steps or phases you expect to go through, and the tasks that you'll need to accomplish to reach each step. These should resemble the acceptance criteria we were working through earlier.)
 
