@@ -1,0 +1,31 @@
+body{
+	background:black;
+	color:white;
+}
+
+.display{
+	border:2px solid green;
+	overflow-y: scroll;
+	overflow-x: auto;
+	font-size: 28px;
+	font-family: 'Press Start 2P', cursive;
+	line-height: 32px;
+	color: green;
+	width:80%;height:70%;
+	position: absolute;
+	top:5%;left:10%;
+}
+
+#buttons{
+	border:2px solid white;
+	width:80%;height:15%;
+	position:absolute;
+	bottom:5%; left:10%;
+}
+
+button{
+	background:white;
+	color:black;
+	font-size: 20px;
+}
+
