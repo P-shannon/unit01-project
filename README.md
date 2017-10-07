@@ -20,7 +20,7 @@ This project, especially with the given timeframe will not be easy. I will need 
 
 ## Phases of Completion
 
-# Phase -4:
+# Phase -2:
 
 >- basic interface exists
 >- characters exist
@@ -29,24 +29,37 @@ This project, especially with the given timeframe will not be easy. I will need 
 >- characters have stats
 >- characters can take turns
 
-# Phase -3:
+# Phase -1:
 
+>- interface becomes modular and can display different information
 >- monsters can exist
 >- monsters can differentiate from each other
->- selecting a battle target will populate a
+>- selecting a battle target will populate a list of possible targets
 >- characters and monsters can select an action on thier turn
 >- basic battle actions exist and have effect
 >- character stats have an effect on a character's performances
 
-# Phase -2:
+# Phase 0:
 
 >- character and monster inventories can exist
 >- items can exist
 >- items can exist outside of a characters' or monsters' inventory
+>- items can be used and have an effect
+>- equipments exist
+>- characters and monsters can hold equipment
+>- they can also equip them and have their stats modified by them
 
+# Phase: 1:
 
+>- characters and monsters can learn abilities
+>- characters can hold abilities
+>- characters can use abilities
+>- abilities have an effect
 
-# Phase 0:
+# in betweens...
+>- tbd
+
+# Phase 4:
 
 >- Interfaces exist
 >- Characters can be organized into teams
