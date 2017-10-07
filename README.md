@@ -99,5 +99,6 @@ This project, especially with the given timeframe will not be easy. I will need 
 (The steps or phases you expect to go through, and the tasks that you'll need to accomplish to reach each step. These should resemble the acceptance criteria we were working through earlier.)
 
 ## Links and Resources
+- [Creating modular js files](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 
 (Anything you've looked up so far or are thinking about using.)
