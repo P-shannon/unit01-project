@@ -7,12 +7,14 @@
 	<link rel="stylesheet" href="./css/reset.css">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	<script type="text/javascript" src="./scripts/mob.js"></script>
 	<script src="./scripts/main.js" type="text/javascript" charset="utf-8" async defer></script>
 </head>
 <body onload="main.runtime()">
 	 <div class="display" id="main"></div>
 	 <div id="buttons">
-	 	<button id="buttTest" onclick="main.mainGameLog(`This button was clicked ${main.buttClick} times!`); main.buttClick++;">Do Thing</button>
+	 	<button id="buttTest" onclick="main.mainGameLog(`This button was clicked ${main.buttClick} times!`); main.++buttClick;">Do Thing</button>
+	 	<button id="harmTest" onclick="main.makeAttack(main.dummy,main.wummy);">Do attack</button>
 	 </div>
 </body>
 </html>
