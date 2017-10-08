@@ -13,8 +13,10 @@
 <body onload="main.runtime()">
 	 <div class="display" id="main"></div>
 	 <div id="buttons">
-	 	<button id="buttTest" onclick="main.mainGameLog(`This button was clicked ${main.buttClick} times!`); main.++buttClick;">Do Thing</button>
-	 	<button id="harmTest" onclick="main.makeAttack(main.dummy,main.wummy);">Do attack</button>
+	 	<button id="buttTest" onclick="main.mainGameLog(`This button was clicked ${main.buttClick} times!`); ++main.buttClick;">Do Thing</button>
+	 	<button id="respawn" onclick="if(main.dumDead){main.createMob('Wummy',1000,100,0,0);main.dumDead = false;main.mainGameLog(`A new Wummy was created!`)}">Spawn a dummy</button>
+	 	
+	 	<button id="harmTest" onclick="main.makeAttack('Dummy','Wummy');">Do attack</button>
 	 </div>
 </body>
 </html>
