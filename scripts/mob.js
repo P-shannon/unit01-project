@@ -20,15 +20,28 @@ Mob.prototype.takeDamage = function(damage){
 
 Mob.prototype.attack = function(target){
 	console.log(`${this.turnTimer}`);
+	let damage = 0;
+	let crit = false;
 	if(this.turnTimer > 0){
 		console.log("Not your turn, stop that shit.");
 		return false;
 	}
-	target.takeDamage(this.str);
+	//following line copy pasted from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+	damage = (Math.floor(Math.random() * ((this.str * 1.75) - (this.str * 0.50) + 1) + (this.str * 0.50)));
+	damage -= Math.ceil(target.str * 0.25);
+	let rand = Math.floor(Math.random() * 100) + 1;
+	if (rand < (this.int*4)){
+		damage = (damage+2)*3; 
+		crit = true;
+	}
+	if (damage < 0){
+		damage = 0;
+	}
+	target.takeDamage(damage);
 	this.turnTimer = 100;
 	let killingBlow = false;
 	if (target.hp <= 0){
 		killingBlow = true;
 	}
-	return [this.name,this.str,target.name, target.hp,killingBlow,"Mob.attack"];
+	return [this.name,damage,target.name,target.hp,killingBlow,crit,"Mob.attack"];
 }

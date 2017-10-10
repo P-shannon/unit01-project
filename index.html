@@ -67,9 +67,10 @@
     <div id="buttons">
     	<!-- TODO: classify buttons for sanity -->
         <button class="init" id="buttTest" onclick="game.changeCreationDialog('visible')">Create a character</button>
-        <button class="post" id="respawn" onclick="if(game.dumDead){game.createMob('Fummy',300,10,0,0,true);game.dumDead = false;game.mainGameLog(`The boss is here!!!`);game.showCombatants();game.changeButtons(`init`,`hidden`)}">Spawn the boss</button>
+        <button class="post" id="respawn" onclick="if(game.dumDead){game.createMob('Fummy',300,10,0,0,true);game.dumDead = false;game.mainGameLog(`The boss is here!!!`);game.showCombatants();game.changeButtons(`post`,`hidden`);game.changeButtons(`main`,`visible`)}">Spawn the boss</button>
 
         <button class="main" id="harmTest" onclick="game.showTargets();">Attack</button>
+        <button class="main" id="mobStats" onclick="game.showStats();">Show your stats</button>
     </div>
 </body>
 

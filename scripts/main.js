@@ -152,19 +152,35 @@ const game = {
 			return false;
 		}
 		if (!(attackReport[4])) {
-			game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
-			game.giveTurn();
+			if(attackReport[5]){
+				game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance dealing a critical ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
+				game.giveTurn();
+			}
+			else{
+				game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
+				game.giveTurn();
+			}
 		} else {
-			game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing a killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
-			game.reapSouls();
-			game.giveTurn();
-			game.dumDead = true;
+			if(attackReport[5]){
+				game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance and dealt a critical, killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
+				game.reapSouls();
+				game.giveTurn();
+				game.dumDead = true;
+			}
+			else{
+				game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing a killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
+				game.reapSouls();
+				game.giveTurn();
+				game.dumDead = true;
+			}
+
 		}
 		game.showCombatants();
 		console.log(`Attack completed!`)
 		defender.turnTimer--;
 		return attackReport;
 	},
+	//TODO: Rename this function, it's current name is retarded
 	controlAI: function(mob) {
 		if (mob.cpu) {
 			console.log("Computer Player's turn!");
@@ -200,7 +216,9 @@ const game = {
 		if (hostiles.length === 0) {
 			console.log(`No hostiles, battle won!`);
 			game.mainGameLog("Battle won!");
+			game.changeButtons("main","hidden");
 			game.changeButtons("post","visible");
+			return false;
 		}
 		game.changeButtons("main","visible");
 		return false;
@@ -208,6 +226,13 @@ const game = {
 	mainGameLog: function(string) {
 		game.mainWindow.innerHTML += string + "<br><br>";
 		game.mainWindow.scrollTop = game.mainWindow.scrollHeight;
+	},
+	showStats: function(){
+		for(let i in game.mobs){
+			if (game.mobs[i].name === game.turnOwner){
+				game.mainGameLog(`${game.mobs[i].name}'s stats:<br>HP: ${game.mobs[i].hp}<br>STR: ${game.mobs[i].str}<br>AGI: ${game.mobs[i].agi}<br>INT: ${game.mobs[i].int}`);
+			}
+		}
 	},
 	showCombatants: function() {
 		console.log(`Displaying combantants...`)
@@ -273,7 +298,5 @@ const game = {
 		game.mainGameLog("Please create a character before continuing.");
 		game.createMob("Wummy", 100, 5, 2, 0, true);
 		game.createMob("Dummy", 100, 5, 2, 0, true);
-		//game.mobs[1].turnTimer = 0;
-		//this.makeAttack("Dummy","Wummy");
 	}
 }
