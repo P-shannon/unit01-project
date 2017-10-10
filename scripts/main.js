@@ -267,6 +267,7 @@ const main = {
 	
 	runtime: function (){
 		console.log("main.js loaded successfully.");
+		main.mainGameLog("Please create a character before continuing.");
 		main.createMob("Wummy",100,5,0,0,true);
 		main.createMob("Dummy",100,5,0,0,true);
 		//main.mobs[1].turnTimer = 0;
