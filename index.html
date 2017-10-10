@@ -1,22 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Game: The Game</title>
-	<link rel="stylesheet" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-	<script type="text/javascript" src="./scripts/mob.js"></script>
-	<script src="./scripts/main.js" type="text/javascript" charset="utf-8" async defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Game: The Game</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <script type="text/javascript" src="./scripts/mob.js"></script>
+    <script src="./scripts/main.js" type="text/javascript" charset="utf-8" async defer></script>
 </head>
+
 <body onload="main.runtime()">
-	 <div class="display" id="main"></div>
-	 <div id="buttons">
-	 	<button id="buttTest" onclick="main.mainGameLog(`This button was clicked ${main.buttClick} times!`); ++main.buttClick;">Do Thing</button>
-	 	<button id="respawn" onclick="if(main.dumDead){main.createMob('Wummy',1000,100,0,0,true);main.dumDead = false;main.mainGameLog(`A new Wummy was created!`)}">Spawn a dummy</button>
-	 	
-	 	<button id="harmTest" onclick="main.makeAttack('Dummy','Wummy');">Do attack</button>
-	 </div>
+	<div class="display" id="aux"></div>
+    <div class="display" id="main"></div>
+    <div class="display" id="creation">
+        <div class="statContainer" id="name">
+            <p>Name:</p>
+            <div class="statInterface">
+            	<input type="text" name="name" id="iName">
+            </div>
+        </div>
+        <div class="statContainer" id="HP">
+            <p>Health Points:</p>
+            <div class="statInterface">
+                <div class="down" id="dHP" onclick="main.characterCreationStatMod('cHP',-1)"></div>
+                <p id="cHP">6</p>
+                <div class="up" id="uHP" onclick="main.characterCreationStatMod('cHP',1)"></div>
+            </div>
+        </div>
+        <div class="statContainer" id="STR">
+            <p>Strength:</p>
+            <div class="statInterface">
+                <div class="down" id="dSTR" onclick="main.characterCreationStatMod('cSTR',-1)"></div>
+                <p id="cSTR">6</p>
+                <div class="up" id="uSTR" onclick="main.characterCreationStatMod('cSTR',1)"></div>
+            </div>
+        </div>
+        <div class="statContainer" id="AGI">
+            <p>Agility:</p>
+            <div class="statInterface">
+                <div class="down" id="dAGI" onclick="main.characterCreationStatMod('cAGI',-1)"></div>
+                <p id="cAGI">6</p>
+                <div class="up" id="uAGI" onclick="main.characterCreationStatMod('cAGI',1)"></div>
+            </div>
+        </div>
+        <div class="statContainer" id="INT">
+            <p>Intelligence:</p>
+            <div class="statInterface">
+                <div class="down" id="dINT" onclick="main.characterCreationStatMod('cINT',-1)"></div>
+                <p id="cINT">6</p>
+                <div class="up" id="uINT" onclick="main.characterCreationStatMod('cINT',1)"></div>
+            </div>
+        </div>
+        <div class="statContainer" id="remaining">
+            <p>Points Remaining:</p>
+            <div class="statInterface">
+                <div style="width:20px;display:inline-block;"></div>
+                <p id="cREM">4</p>
+                <div style="width:20px;display:inline-block;"></div>
+            </div>
+        </div>
+       	<button id="createChar" onclick="main.characterCreationConfirm()">Confirm</button>
+    </div>
+    <div id="buttons">
+    	<!-- TODO: classify buttons for sanity -->
+        <button id="buttTest" onclick="main.changeCreationDialog('visible')">Create a character</button>
+        <button id="respawn" onclick="if(main.dumDead){main.createMob('Wummy',1000,100,0,0,true);main.dumDead = false;main.mainGameLog(`A new Wummy was created!`)}">Spawn a dummy</button>
+
+        <button id="harmTest" onclick="main.showTargets();">Do attack</button>
+    </div>
 </body>
+
 </html>

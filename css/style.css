@@ -1,6 +1,11 @@
 body{
 	background:black;
 	color:white;
+	user-select: none;
+}
+
+div{
+	background:black;
 }
 
 .display{
@@ -11,9 +16,99 @@ body{
 	font-family: 'Press Start 2P', cursive;
 	line-height: 32px;
 	color: green;
-	width:80%;height:70%;
 	position: absolute;
+}
+
+#aux{
+	width:80%;height:40%;
 	top:5%;left:10%;
+}
+
+#main{
+	width:80%;height:25%;
+	top:50%;left:10%;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+#creation{
+	z-index: 2;
+	width:90%;height:50%;
+	top:15%;left:5%;
+	font-size: 20px;
+	visibility: hidden;
+}
+
+#creation .statContainer{
+	position:relative;
+	margin:5px;
+}
+
+#creation .statContainer .statInterface{
+	display:inline-block;
+	position:absolute;
+	right:0;
+}
+
+#creation .statContainer .statInterface p{
+	width:75px;
+	text-align: center;
+}
+
+#creation .down{
+	display:inline-block;
+	position:relative;
+	top:5px;
+	/*Created using http://apps.eky.hk/css-triangle-generator/
+      Manual div triangle creation is tedious, got things to do.*/
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 20px 0 0 20px;
+	border-color: transparent transparent transparent green;
+}
+
+#creation .down:hover{
+	border-color: transparent transparent transparent #00da00;
+}
+
+#creation .up{
+	display: inline-block;
+	position:relative;
+	bottom:5px;
+	/*Created using http://apps.eky.hk/css-triangle-generator/
+      Manual div triangle creation is tedious, got things to do.*/
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 20px 20px 0;
+	border-color: transparent green transparent transparent;
+}
+
+#creation .up:hover{
+	border-color: transparent #00da00 transparent transparent;
+}
+
+#creation p{
+	display:inline-block;
+}
+
+#creation input{
+	width: 155px; height:18px;
+	background:black;
+	color:green;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 16px;
+	border:0px;
+	border-bottom: 1px solid green;
+	position:relative;
+	bottom:3px;
+}
+
+#creation button{
+	width:90px;
+	position:absolute;
+	bottom:5%;left:calc(50% - 45px);
 }
 
 #buttons{
