@@ -174,7 +174,21 @@ const main = {
 		if(mob.cpu){
 			console.log("Computer Player's turn...");
 			//TODO: make this more intelligent
-			setTimeout(main.makeAttack,750,mob.name,"dummy");
+			let hostiles = [];
+			for (let i in main.mobs){
+				if (main.mobs[i].cpu === false){
+					hostiles.push(main.mobs[i]);
+				}
+			}
+			if (hostiles.length === 0){
+				console.log(`All players deceased. Surrendering turn.`)
+				main.showCombatants();
+				main.changeButtons('visible');
+				return false;
+			}
+			let target = hostiles[Math.floor(Math.random()*hostiles.length)].name;
+			console.log(`Targeting ${target}...`);
+			setTimeout(main.makeAttack,750,mob.name,target);
 			return true;
 		}
 		console.log("Player's turn...");
@@ -190,12 +204,20 @@ const main = {
 		main.auxWindow.innerHTML = "";
 		for(let i in main.mobs){
 			//TODO: make more sensitive to 'teams'
-			if(main.mobs[i].cpu === false){
+			if(main.mobs[i].name === main.protag){
 				if(main.mobs[i].name === main.turnOwner){
 					main.auxWindow.innerHTML += `>>${main.mobs[i].name} (You): ${main.mobs[i].hp} HP <br>`;
 				}
 				else{
 					main.auxWindow.innerHTML += `${main.mobs[i].name} (You): ${main.mobs[i].hp} HP <br>`;
+				}	
+			}
+			else if(main.mobs[i].cpu === false){
+				if(main.mobs[i].name === main.turnOwner){
+					main.auxWindow.innerHTML += `>>${main.mobs[i].name} (Ally): ${main.mobs[i].hp} HP <br>`;
+				}
+				else{
+					main.auxWindow.innerHTML += `${main.mobs[i].name} (Ally): ${main.mobs[i].hp} HP <br>`;
 				}	
 			}
 			else{
@@ -218,6 +240,12 @@ const main = {
 			if (main.mobs[i].name === main.turnOwner){
 				current.innerHTML = `${main.mobs[i].name} (You)`;
 			}
+			else if(main.mobs[i].name === main.protag){
+				current.innerHTML = `${main.mobs[i].name} (Main)`;
+			}
+			else if(main.mobs[i].cpu === false){
+				current.innerHTML = `${main.mobs[i].name} (Ally)`;
+			}
 			else{
 				current.innerHTML = main.mobs[i].name;
 			}
@@ -239,8 +267,8 @@ const main = {
 	
 	runtime: function (){
 		console.log("main.js loaded successfully.");
-		main.createMob("Wummy",1000,100,0,0,true);
-		main.createMob("Dummy",1000,100,0,0,true);
+		main.createMob("Wummy",100,5,0,0,true);
+		main.createMob("Dummy",100,5,0,0,true);
 		//main.mobs[1].turnTimer = 0;
 		//this.makeAttack("Dummy","Wummy");
 	}

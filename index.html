@@ -67,7 +67,7 @@
     <div id="buttons">
     	<!-- TODO: classify buttons for sanity -->
         <button id="buttTest" onclick="main.changeCreationDialog('visible')">Create a character</button>
-        <button id="respawn" onclick="if(main.dumDead){main.createMob('Wummy',1000,100,0,0,true);main.dumDead = false;main.mainGameLog(`A new Wummy was created!`)}">Spawn a dummy</button>
+        <button id="respawn" onclick="if(main.dumDead){main.createMob('Wummy',300,10,0,0,true);main.dumDead = false;main.mainGameLog(`A new Wummy was created!`);main.showCombatants()}">Spawn a dummy</button>
 
         <button id="harmTest" onclick="main.showTargets();">Do attack</button>
     </div>
