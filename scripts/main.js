@@ -11,6 +11,7 @@ const game = {
 	//game.mobs[]
 	createMob: function(name, hp, str, agi, int, controller) {
 		game.mobs[(game.mobs.length)] = new Mob(name, hp, str, agi, int, controller);
+		game.mobs[(game.mobs.length)-1].loadCQC();
 	},
 	changeCreationDialog: function(state) {
 		game.creationDialog.style.visibility = state;
@@ -113,7 +114,7 @@ const game = {
 		}
 	},
 	//TODO: make this action agnostic.
-	makeAttack: function(aggressorName, defenderName) {
+	makeAttack: function(aggressorName, defenderName, attack) {
 		game.changeButtons("main","hidden");
 		let aggressor = null;
 		let defender = null;
@@ -146,34 +147,39 @@ const game = {
 			game.mainGameLog(`${defenderName} was not found, please try again.`);
 			return false;
 		}
-		let attackReport = aggressor.attack(defender);
+		let attackReport = aggressor.attack(defender,attack);
 		if (attackReport == false) {
 			console.log("Attack failed.")
 			return false;
 		}
-		if (!(attackReport[4])) {
-			if(attackReport[5]){
-				game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance dealing a critical ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
-				game.giveTurn();
+		if (attackReport[6] === true){
+			game.mainGameLog(`${attackReport[2]} dodges ${attackReport[0]}'s attack!`);
+			game.giveTurn();
+		}
+		else{
+			if (!(attackReport[4])) {
+				if(attackReport[5]){
+					game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance and critically ${attackReport[7]} for ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
+					game.giveTurn();
+				}
+				else{
+					game.mainGameLog(`${attackReport[0]} ${attackReport[7]} ${attackReport[2]} dealing ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
+					game.giveTurn();
+				}
+			} else {
+				if(attackReport[5]){
+					game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance and critically ${attackReport[7]} for ${attackReport[1]} damage, a killing blow!<br>${attackReport[2]} is knocked to the ground!`);
+					game.reapSouls();
+					game.giveTurn();
+					game.dumDead = true;
+				}
+				else{
+					game.mainGameLog(`${attackReport[0]} ${attackReport[7]} ${attackReport[2]} dealing a killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
+					game.reapSouls();
+					game.giveTurn();
+					game.dumDead = true;
+				}
 			}
-			else{
-				game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing ${attackReport[1]} damage, leaving ${attackReport[3]}HP remaining...`);
-				game.giveTurn();
-			}
-		} else {
-			if(attackReport[5]){
-				game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance and dealt a critical, killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
-				game.reapSouls();
-				game.giveTurn();
-				game.dumDead = true;
-			}
-			else{
-				game.mainGameLog(`${attackReport[0]} attacked ${attackReport[2]} dealing a killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
-				game.reapSouls();
-				game.giveTurn();
-				game.dumDead = true;
-			}
-
 		}
 		game.showCombatants();
 		console.log(`Attack completed!`)
@@ -201,7 +207,7 @@ const game = {
 			}
 			let target = hostiles[Math.floor(Math.random() * hostiles.length)].name;
 			console.log(`Targeting ${target}...`);
-			setTimeout(game.makeAttack, 750, mob.name, target);
+			setTimeout(game.makeAttack, 750, mob.name, target, "rawAttack");
 			return true;
 		}
 		console.log("Player's turn!");
@@ -230,7 +236,7 @@ const game = {
 	showStats: function(){
 		for(let i in game.mobs){
 			if (game.mobs[i].name === game.turnOwner){
-				game.mainGameLog(`${game.mobs[i].name}'s stats:<br>HP: ${game.mobs[i].hp}<br>STR: ${game.mobs[i].str}<br>AGI: ${game.mobs[i].agi}<br>INT: ${game.mobs[i].int}`);
+				game.mainGameLog(`${game.mobs[i].name}'s stats:<br>Max HP: ${game.mobs[i].maxhp}<br>STR: ${game.mobs[i].str}<br>AGI: ${game.mobs[i].agi}<br>INT: ${game.mobs[i].int}`);
 			}
 		}
 	},
@@ -260,26 +266,69 @@ const game = {
 			}
 		}
 	},
-	showTargets: function() {
-		console.log('Showing target list!')
+	showSkills: function() {
+		console.log('Showing our skills!');
+		let you = null;
 		let buttonHolder = document.querySelector('#buttons');
 		game.changeButtons("main","hidden");
 		game.changeButtons("init","hidden");
+		for (let i in game.mobs){
+			if(String(game.mobs[i].name).toLowerCase() === String(game.turnOwner).toLowerCase()){
+				console.log("found");
+				you = game.mobs[i];
+				break;
+			}
+		}
+		for (let i in you.abilities){
+			console.log(`Creating skill button for: ${i}...`)
+			let current = document.createElement('button');
+			current.innerHTML = i;
+			current.className = 'temp';
+			let doThis = function() {
+				game.clearTemps();
+				game.showTargets(i);
+			}
+			current.addEventListener('click', doThis);
+			buttonHolder.appendChild(current);
+		}
+
+
+	},
+	showTargets: function(attack) {
+		console.log(`Showing target list with attack context: ${attack}!`);
+		let buttonHolder = document.querySelector('#buttons');
+		game.changeButtons("main","hidden");
+		game.changeButtons("init","hidden");
+		let players = [];
 		for (let i in game.mobs) {
 			console.log(`Creating attack button for: ${game.mobs[i].name}...`)
 			let current = document.createElement('button');
-			if (game.mobs[i].name === game.turnOwner) {
-				current.innerHTML = `${game.mobs[i].name} (You)`;
-			} else if (game.mobs[i].name === game.protag) {
-				current.innerHTML = `${game.mobs[i].name} (Main)`;
-			} else if (game.mobs[i].cpu === false) {
-				current.innerHTML = `${game.mobs[i].name} (Ally)`;
-			} else {
-				current.innerHTML = game.mobs[i].name;
+			if (game.mobs[i].cpu === false){
+				players.push(game.mobs[i]);
+				continue;
+			}
+			current.innerHTML = game.mobs[i].name;
+			current.className = 'temp';
+			let attackThis = function() {
+				game.makeAttack(game.turnOwner, game.mobs[i].name, attack);
+				game.clearTemps();
+			}
+			current.addEventListener('click', attackThis);
+			buttonHolder.appendChild(current);
+		}
+		for (let i in players) {
+			console.log(`Creating attack button for: ${players[i].name}...`)
+			let current = document.createElement('button');
+			if (players[i].name === game.turnOwner) {
+				current.innerHTML = `${players[i].name} (You)`;
+			} else if (players[i].name === game.protag) {
+				current.innerHTML = `${players[i].name} (Main)`;
+			} else if (players[i].cpu === false) {
+				current.innerHTML = `${players[i].name} (Ally)`;
 			}
 			current.className = 'temp';
 			let attackThis = function() {
-				game.makeAttack(game.turnOwner, game.mobs[i].name);
+				game.makeAttack(game.turnOwner, players[i].name, attack);
 				game.clearTemps();
 			}
 			current.addEventListener('click', attackThis);
@@ -296,7 +345,7 @@ const game = {
 		game.changeButtons("post","hidden")
 		console.log("game.js loaded successfully.");
 		game.mainGameLog("Please create a character before continuing.");
-		game.createMob("Wummy", 100, 5, 2, 0, true);
-		game.createMob("Dummy", 100, 5, 2, 0, true);
+		game.createMob("Wummy", 100, 5, 5, 5, true);
+		game.createMob("Dummy", 100, 5, 5, 5, true);
 	}
 }
