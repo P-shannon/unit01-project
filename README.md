@@ -7,37 +7,47 @@
 
 I enjoy games that require thought and also crank up the stakes way high. The idea of consenquence is a big focus in the rouge-like genre, but it's not really prominant in other genres. I'd like to see some high stakes and punishment in a seemingly complicated turn based game that'll hopefully be optimized for mobile screens.
 
-(Brief description of the game, why you're choosing to make it)
+## Instructions for use
+
+1. Create a character
+2. Give your character a name
+3. Allocate points into preferred stats
+4. Press confirm
+5. (Optional) Repeate steps 1-4.
+6. (Optional <IMPORTANT>) DO NOT GIVE YOUR CHARACTERS THE SAME NAME AS AN EXISTING CHARACTER!!
+7. Press the attack button
+8. Select perferred attack method
+9. Select target
+10. repeat steps 7-9 until someone dies
+11. repeat all as needed.
 
 ## Wireframe
 
-(Your wireframes go here. Preferably two or more)
+Forgive me GA, for I have sinned. I made this project without wireframing. I'm typically big on wireframing but I spent a significant amount of time not knowing how it was going to look and I didn't want to lose time waiting for inspiration, so I improvised on the spot. It'll feel dirty if I just drew up a wireframe after the fact, so I'll accept any repercussions I may incurr. Don't worry, I fully understand the significance and importance of a wireframe and all of my projects excluding this one, had a wireframe.
 
 ## Initial thoughts on game structure
 This project, especially with the given timeframe will not be easy. I will need to create a lot of interfaces; character menus, equipments, spells, team settings, locations, a main menu, a combat screen, and a lot of other things depending on how much progress I make. Not to mention the actual game logic, I'll have to manage a modular style of having entities take turns making actions, I'll also have to manage a database or proceedurally generate the various items that will be found in the game. The monsters that will be fought and the various bosses will need consideration and the rabit hole only gets deeper. I sometimes feel like this might be too ambitious, but I'm a little tired of not pushing myself to my limit for things that I actually want to do. Ultimately I'll be satisfied with just completing the minimum version project.
-
-(Write out what challenges you expect to encounter, or ideas you want to come up with)
 
 ## Phases of Completion
 
 # Phase -2:
 
->- basic interface exists
->- characters exist
->- characters can harm each other
->- characters can die
->- characters have stats
->- characters can take turns
+>- ~~basic interface exists~~
+>- ~~characters exist~~
+>- ~~characters can harm each other~~
+>- ~~characters can die~~
+>- ~~characters have stats~~
+>- ~~characters can take turns~~
 
 # Phase -1:
 
->- interface becomes modular and can display different information
->- monsters can exist
->- monsters can differentiate from each other
->- selecting a battle target will populate a list of possible targets
->- characters and monsters can select an action on thier turn
->- basic battle actions exist and have effect
->- character stats have an effect on a character's performances
+>- ~~interface becomes modular and can display different information~~
+>- ~~monsters can exist~~
+>- ~~monsters can differentiate from each other~~
+>- ~~selecting a battle target will populate a list of possible targets~~
+>- ~~characters and monsters can select an action on thier turn~~
+>- ~~basic battle actions exist and have effec~~t
+>- ~~character stats have an effect on a character's performances~~
 
 # Phase 0:
 
