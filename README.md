@@ -110,10 +110,13 @@ This project, especially with the given timeframe will not be easy. I will need 
 
 ## Explaination of technologies used
 
--Vanilla Javascript DOM manipulation: Used to dynamically display information to the window.
--Javascript objects: Used to manage and instantiate various aspects of the game, like the characters and the game handler object
--Vanilla CSS: Used to lightly style and position the elements on the window
--Vanilla HTML: Used to put elements and information on the window
+- Vanilla Javascript DOM manipulation: Used to dynamically display information to the window.
+
+- Javascript objects: Used to manage and instantiate various aspects of the game, like the characters and the game handler object
+
+- Vanilla CSS: Used to lightly style and position the elements on the window
+
+- Vanilla HTML: Used to put elements and information on the window
 
 ## Links and Resources
 - [~~Creating modular js files~~](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) Doesn't work with current javascript version
