@@ -99,7 +99,7 @@ const game = {
 		game.turnOwner = game.mobs[lowestAddress].name;
 		console.log(`Next up: ${game.mobs[lowestAddress].name}. Advancing turnTimers...`);
 		for (let i in game.mobs) {
-			game.mobs[i].turnTimer -= (lowest + (game.mobs[i].agi) * 4.50);
+			game.mobs[i].turnTimer -= (lowest + (game.mobs[i].agi) * 5);
 		}
 		console.log(`Turn time advancement complete. Handing control to Mob.`)
 		game.controlAI(game.mobs[lowestAddress]);
@@ -246,8 +246,14 @@ const game = {
 		for(let i in game.mobs){
 			if (game.mobs[i].name === game.turnOwner){
 				game.mainGameLog(`${game.mobs[i].name}'s stats:<br>Max HP: ${game.mobs[i].maxhp}<br>STR: ${game.mobs[i].str}<br>AGI: ${game.mobs[i].agi}<br>INT: ${game.mobs[i].int}`);
+				game.mainWindow.innerHTML += `${game.mobs[i].name} knows how to do the following things: <br>`;
+				for(let j in game.mobs[i].abilities){
+					game.mainWindow.innerHTML += `${j}<br>`;
+
+				}
 			}
 		}
+		game.mainWindow.scrollTop = game.mainWindow.scrollHeight;
 	},
 	showCombatants: function() {
 		console.log(`Displaying combantants...`)
@@ -360,14 +366,17 @@ const game = {
 	**********************************************/
 
 	monsters: [
-		[`Imp`,5,4,9,9,true],
+		[`Imp`,5,4,10,10,true],
 		[`Ork`,10,8,5,3,true],
 		[`BugBear`,15,11,2,2,true],
+		[`Viperoid`,7,6,12,6,true],
+		[`Sloth Demon`,4,12,3,8,true],
+		[`Wisp Manifest`,6,7,5,12,true],
 	],
 	spawnMonster: function(number){
 		let rand = Math.floor(Math.random() * game.monsters.length);
 		for(let i=0;i < number;i++){
-			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,((game.monsters[rand][1])+(Math.floor((Math.random() * 4) + -3)))*10,((game.monsters[rand][2])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][3])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][4])+(Math.floor((Math.random() * 6) + -3))),game.monsters[rand][5]);
+			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,((game.monsters[rand][1])+(Math.floor((Math.random() * 5) + -3)))*10,((game.monsters[rand][2])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][3])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][4])+(Math.floor((Math.random() * 6) + -3))),game.monsters[rand][5]);
 			console.log(game.mobs[game.mobs.length-1]);
 		}
 	},
