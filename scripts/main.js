@@ -42,6 +42,7 @@ const game = {
 		let agi = Number(document.querySelector('#cAGI').innerHTML);
 		let int = Number(document.querySelector('#cINT').innerHTML);
 		game.createMob(name, hp, str, agi, int, false);
+		game.mobs[game.mobs.length-1].loadAbility("kick");
 		game.mainGameLog(`With a bright flash of light, your surroundings appear before you. "You know what to do, ${name}." echoes through the air briefly. <br> You have no idea what to do.`);
 		for (let i in game.mobs) {
 			console.log("Assigning protagonist...");
@@ -98,7 +99,7 @@ const game = {
 		game.turnOwner = game.mobs[lowestAddress].name;
 		console.log(`Next up: ${game.mobs[lowestAddress].name}. Advancing turnTimers...`);
 		for (let i in game.mobs) {
-			game.mobs[i].turnTimer -= (lowest + (game.mobs[i].agi) * 4);
+			game.mobs[i].turnTimer -= (lowest + (game.mobs[i].agi) * 4.50);
 		}
 		console.log(`Turn time advancement complete. Handing control to Mob.`)
 		game.controlAI(game.mobs[lowestAddress]);
@@ -186,6 +187,7 @@ const game = {
 	},
 	//TODO: Rename this function, it's current name is retarded
 	controlAI: function(mob) {
+		mob.turnTimer = 0;
 		if (mob.cpu) {
 			console.log("Computer Player's turn!");
 			//TODO: make this more intelligent
@@ -198,14 +200,19 @@ const game = {
 				}
 			}
 			if (hostiles.length === 0) {
-				console.log(`All players deceased. Game over.`)
+				console.log(`All players deceased. Game over.`);
+				game.wins = 0;
 				game.showCombatants();
-				game.changeButtons('init','visible');
+				//game.changeButtons('init','visible');
+				setTimeout(game.changeButtons,2000,'init','visible');
+				setTimeout(function(){game.mobs=[]},2000);
+				setTimeout(game.showCombatants,2000);
 				return false;
 			}
 			let target = hostiles[Math.floor(Math.random() * hostiles.length)].name;
-			console.log(`Targeting ${target}...`);
-			setTimeout(game.makeAttack, 750, mob.name, target, "rawAttack");
+			let attack = Object.keys(mob.abilities)[Math.floor(Math.random() * Object.keys(mob.abilities).length)]
+			console.log(`Targeting ${target} with ${attack}...`);
+			setTimeout(game.makeAttack, 750, mob.name, target, attack);
 			return true;
 		}
 		console.log("Player's turn!");
@@ -293,8 +300,11 @@ const game = {
 			current.addEventListener('click', doThis);
 			buttonHolder.appendChild(current);
 		}
-
-
+		let cancel = document.createElement('button');
+		cancel.innerText = "<Cancel Attack>";
+		cancel.className = 'temp';
+		cancel.addEventListener('click', function(){game.clearTemps();game.changeButtons("main","visible");});
+		buttonHolder.appendChild(cancel);
 	},
 	showTargets: function(attack) {
 		console.log(`Showing target list with attack context: ${attack}!`);
@@ -336,6 +346,11 @@ const game = {
 			current.addEventListener('click', attackThis);
 			buttonHolder.appendChild(current);
 		}
+		let cancel = document.createElement('button');
+		cancel.innerText = "<Cancel Attack>";
+		cancel.className = 'temp';
+		cancel.addEventListener('click', function(){game.clearTemps();game.changeButtons("main","visible");});
+		buttonHolder.appendChild(cancel);
 	},
 
 	/**********************************************
@@ -352,7 +367,8 @@ const game = {
 	spawnMonster: function(number){
 		let rand = Math.floor(Math.random() * game.monsters.length);
 		for(let i=0;i < number;i++){
-			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,game.monsters[rand][1]*10,game.monsters[rand][2],game.monsters[rand][3],game.monsters[rand][4],game.monsters[rand][5]);
+			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,((game.monsters[rand][1])+(Math.floor((Math.random() * 4) + -3)))*10,((game.monsters[rand][2])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][3])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][4])+(Math.floor((Math.random() * 6) + -3))),game.monsters[rand][5]);
+			console.log(game.mobs[game.mobs.length-1]);
 		}
 	},
 
@@ -367,7 +383,6 @@ const game = {
 		game.changeButtons("post","hidden")
 		console.log("game.js loaded successfully.");
 		game.mainGameLog("Please create a character before continuing.");
-		game.spawnMonster(1);
 		//game.createMob("Wummy", 100, 5, 5, 5, true);
 		//game.createMob("Dummy", 100, 5, 5, 5, true);
 	}

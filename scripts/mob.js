@@ -10,7 +10,7 @@ const abilities = {
 
 function Mob(name,hp,str,agi,int,controller){
 	this.name = name; 	  //Identity
-	this.maxhp = hp;
+	this.maxhp = hp;	  //Max Health Points
 	this.hp = hp;	      //Health Points
 	this.str = str;	  	  //Strength
 	this.agi = agi;   	  //Agility
@@ -25,7 +25,7 @@ Mob.prototype.loadCQC = function(){
 	console.log(`Granting basics to ${this.name}...`)
 	this.abilities["rawAttack"] = abilities["rawAttack"];
 	this.abilities["fastAttack"] = abilities["fastAttack"];
-	this.abilities["kick"] = abilities["kick"];
+	//this.abilities["kick"] = abilities["kick"];
 	this.abilities["heavyAttack"] = abilities["heavyAttack"];
 	console.log(this.abilities);
 }
@@ -55,7 +55,7 @@ Mob.prototype.attack = function(target,ability){
 		return false;
 	}
 	let rand = Math.floor(Math.random() * 100) + 1;
-	if (rand < ((target.agi*2.25)+(target.int*1.75))-((this.agi*1.50)+(this.int*1.50))){
+	if (rand < ((target.agi*4.00)+(target.int*3.00))-((this.agi*1)+(this.int*1.50))){
 		console.log("Attack was dodged");
 		dodged = true;
 	}
@@ -65,7 +65,6 @@ Mob.prototype.attack = function(target,ability){
 		target.turnTimer += 20;
 	}
 	else{
-		//following line copy pasted from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random	
 		damage = Math.ceil(eval(this.abilities[ability][1]));
 		damage -= Math.ceil(target.str * 0.25);
 		if (damage < 0){

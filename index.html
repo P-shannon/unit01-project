@@ -57,18 +57,19 @@
         <div class="statContainer" id="remaining">
             <p>Points Remaining:</p>
             <div class="statInterface">
-                <div style="width:20px;display:inline-block;"></div>
+                <div style="width:30px;display:inline-block;"></div>
                 <p id="cREM">4</p>
-                <div style="width:20px;display:inline-block;"></div>
+                <div style="width:30px;display:inline-block;"></div>
             </div>
         </div>
-       	<button id="createChar" onclick="game.characterCreationConfirm();game.changeButtons(`main`,`visible`);">Confirm</button>
+       	<button id="createChar" onclick="game.characterCreationConfirm();game.changeButtons(`main`,`visible`);game.spawnMonster(1);game.showCombatants();">Confirm</button>
+       	<button id="cancel" onclick="game.changeCreationDialog('hidden')">Cancel</button>
     </div>
     <div id="buttons">
     	<!-- TODO: classify buttons for sanity -->
         <button class="init" id="buttTest" onclick="game.changeCreationDialog('visible')">Create a character</button>
         <button class="post" id="respawn" onclick="game.spawnMonster(game.wins);game.mainGameLog(`In a bright flash of light, more monsters apear!!!`);game.showCombatants();game.changeButtons(`post`,`hidden`);game.changeButtons(`main`,`visible`)">Spawn another wave</button>
-        <button class="post" id="respawn" onclick="game.createMob('Fummy',300,12,0,0,true);game.mainGameLog(`The boss is here!!!`);game.showCombatants();game.changeButtons(`post`,`hidden`);game.changeButtons(`main`,`visible`)">Spawn the boss</button>
+        <button class="post" id="respawn" onclick="game.createMob('Fummy',300,12,0,0,true);game.spawnMonsters(game.wins - 1);game.mainGameLog(`The boss is here!!!`);game.showCombatants();game.changeButtons(`post`,`hidden`);game.changeButtons(`main`,`visible`);">Spawn the boss</button>
 
         <button class="main" id="harmTest" onclick="game.showSkills();">Attack</button>
         <button class="main" id="mobStats" onclick="game.showStats();">Show your stats</button>

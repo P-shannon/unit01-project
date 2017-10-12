@@ -22,28 +22,28 @@ div{
 #aux{
 	width:80%;height:40%;
 	top:5%;left:10%;
-	font-size: 20px;
-	line-height: 24px;
+	font-size: 22px;
+	line-height: 26px;
 }
 
 #main{
 	width:80%;height:25%;
 	top:50%;left:10%;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 22px;
+	line-height: 26px;
 }
 
 #creation{
 	z-index: 2;
 	width:90%;height:50%;
 	top:15%;left:5%;
-	font-size: 20px;
+	font-size: 26px;
 	visibility: hidden;
 }
 
 #creation .statContainer{
 	position:relative;
-	margin:5px;
+	margin:30px;
 }
 
 #creation .statContainer .statInterface{
@@ -66,7 +66,7 @@ div{
 	width: 0;
 	height: 0;
 	border-style: solid;
-	border-width: 20px 0 0 20px;
+	border-width: 30px 0 0 30px;
 	border-color: transparent transparent transparent green;
 }
 
@@ -83,7 +83,7 @@ div{
 	width: 0;
 	height: 0;
 	border-style: solid;
-	border-width: 0 20px 20px 0;
+	border-width: 0 30px 30px 0;
 	border-color: transparent green transparent transparent;
 }
 
@@ -96,33 +96,42 @@ div{
 }
 
 #creation input{
-	width: 155px; height:18px;
+	width: 175px; height:28px;
 	background:black;
 	color:green;
 	font-family: 'Press Start 2P', cursive;
-	font-size: 16px;
+	font-size: 26px;
 	border:0px;
 	border-bottom: 1px solid green;
 	position:relative;
 	bottom:3px;
 }
 
-#creation button{
-	width:90px;
+#creation #createChar{
+	width:100px;
 	position:absolute;
-	bottom:5%;left:calc(50% - 45px);
+	bottom:5%;left:calc(40% - 50px);
 }
+
+#creation #cancel{
+	width:100px;
+	position:absolute;
+	bottom:5%;left:calc(60% - 50px);
+}
+
 
 #buttons{
 	border:2px solid white;
 	width:80%;height:15%;
 	position:absolute;
 	bottom:5%; left:10%;
+	overflow-y: scroll;
+	overflow-x: auto;
 }
 
 button{
 	background:white;
 	color:black;
-	font-size: 20px;
+	font-size: 26px;
 }
 
