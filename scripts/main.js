@@ -1,5 +1,5 @@
 const game = {
-	dumDead: false,
+	wins: 0,
 	buttons: document.querySelectorAll('#buttons button'),
 	creationDialog: document.querySelector("#creation"),
 	mainWindow: document.querySelector('#main'),
@@ -171,13 +171,11 @@ const game = {
 					game.mainGameLog(`${attackReport[0]} found a vulnerability in ${attackReport[2]}'s stance and critically ${attackReport[7]} for ${attackReport[1]} damage, a killing blow!<br>${attackReport[2]} is knocked to the ground!`);
 					game.reapSouls();
 					game.giveTurn();
-					game.dumDead = true;
 				}
 				else{
 					game.mainGameLog(`${attackReport[0]} ${attackReport[7]} ${attackReport[2]} dealing a killing blow, for ${attackReport[1]} damage!<br>${attackReport[2]} falls over.`);
 					game.reapSouls();
 					game.giveTurn();
-					game.dumDead = true;
 				}
 			}
 		}
@@ -221,9 +219,13 @@ const game = {
 		}
 		if (hostiles.length === 0) {
 			console.log(`No hostiles, battle won!`);
-			game.mainGameLog("Battle won!");
+			game.mainGameLog("Battle won, health restored!");
+			game.wins++;
 			game.changeButtons("main","hidden");
 			game.changeButtons("post","visible");
+			for(let i in game.mobs){
+				game.mobs[i].hp = game.mobs[i].maxhp;
+			}
 			return false;
 		}
 		game.changeButtons("main","visible");
@@ -335,17 +337,38 @@ const game = {
 			buttonHolder.appendChild(current);
 		}
 	},
+
+	/**********************************************
+	*
+	*        This handles monster generation
+	*
+	**********************************************/
+
+	monsters: [
+		[`Imp`,5,4,9,9,true],
+		[`Ork`,10,8,5,3,true],
+		[`BugBear`,15,11,2,2,true],
+	],
+	spawnMonster: function(number){
+		let rand = Math.floor(Math.random() * game.monsters.length);
+		for(let i=0;i < number;i++){
+			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,game.monsters[rand][1]*10,game.monsters[rand][2],game.monsters[rand][3],game.monsters[rand][4],game.monsters[rand][5]);
+		}
+	},
+
 	/**********************************************
 	 *
 	 *  Main runtime is here. Nothing else should go 
 	 *                 under here.
 	 **********************************************/
+
 	runtime: function() {
 		game.changeButtons("main","hidden");
 		game.changeButtons("post","hidden")
 		console.log("game.js loaded successfully.");
 		game.mainGameLog("Please create a character before continuing.");
-		game.createMob("Wummy", 100, 5, 5, 5, true);
-		game.createMob("Dummy", 100, 5, 5, 5, true);
+		game.spawnMonster(1);
+		//game.createMob("Wummy", 100, 5, 5, 5, true);
+		//game.createMob("Dummy", 100, 5, 5, 5, true);
 	}
 }
