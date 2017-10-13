@@ -1,6 +1,6 @@
 *** Patrick Shannon / 10/05/17 ***
 
-# Delvers: Curses of Risk and Rewards Proposal
+# Delvers: Curses of Risk and Rewards Project Submission
 
 ## What is Delvers?
 >A game about managing talent, resources, and risk as you fight through dungeons in turn-based combat, featuring permanent death.
