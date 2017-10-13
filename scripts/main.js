@@ -368,14 +368,14 @@ const game = {
 	monsters: [
 		[`Imp`,5,4,10,10,true],
 		[`Ork`,10,8,5,3,true],
-		[`BugBear`,15,11,2,2,true], //needs ballancing
+		[`BugBear`,15,11,2,2,true], //needs balancing
 		[`Viperoid`,7,6,12,6,true], //needs balancing
 		[`Sloth Demon`,4,12,3,8,true],
 		[`Wisp Manifest`,6,7,5,12,true],
 	],
 	spawnMonster: function(number){
-		let rand = Math.floor(Math.random() * game.monsters.length);
 		for(let i=0;i < number;i++){
+			let rand = Math.floor(Math.random() * game.monsters.length);
 			game.createMob(`${game.monsters[rand][0]} <${Math.floor(Math.random()*1000)}>`,((game.monsters[rand][1])+(Math.floor((Math.random() * 5) + -3)))*10,((game.monsters[rand][2])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][3])+(Math.floor((Math.random() * 6) + -3))),((game.monsters[rand][4])+(Math.floor((Math.random() * 6) + -3))),game.monsters[rand][5]);
 			console.log(game.mobs[game.mobs.length-1]);
 		}
