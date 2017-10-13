@@ -368,8 +368,8 @@ const game = {
 	monsters: [
 		[`Imp`,5,4,10,10,true],
 		[`Ork`,10,8,5,3,true],
-		[`BugBear`,15,11,2,2,true],
-		[`Viperoid`,7,6,12,6,true],
+		[`BugBear`,15,11,2,2,true], //needs ballancing
+		[`Viperoid`,7,6,12,6,true], //needs balancing
 		[`Sloth Demon`,4,12,3,8,true],
 		[`Wisp Manifest`,6,7,5,12,true],
 	],
